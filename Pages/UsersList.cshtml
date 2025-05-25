@@ -1,0 +1,29 @@
+﻿@page
+@model UsersListModel
+
+<h2>All Registered Users</h2>
+
+<table>
+    <thead>
+        <tr>
+            <th>Full Name</th>
+            <th>Place</th>
+            <th>Phone</th>
+            <th>DOB</th>
+            <th>Country</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var user in Model.Users)
+        {
+            <tr>
+                <td>@user.FullName</td>
+                <td>@user.Place</td>
+                <td>@user.PhoneNumber</td>
+                <td>@user.DateOfBirth.ToShortDateString()</td>
+                <td>@user.Country</td>
+            </tr>
+        }
+    </tbody>
+</table>
+

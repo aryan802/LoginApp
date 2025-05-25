@@ -1,0 +1,15 @@
+﻿@page "/"
+@model LoginModel
+
+<h2>Login</h2>
+
+<form method="post">
+    <input asp-for="Username" placeholder="Username" /><br />
+    <input asp-for="Password" placeholder="Password" type="password" /><br />
+    <button type="submit">Login</button>
+</form>
+
+<a href="/ChangePassword">Forgot password?</a><br />
+<a href="/Register">New User</a>
+
+

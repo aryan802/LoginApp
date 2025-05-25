@@ -1,0 +1,16 @@
+﻿@page
+@model UpdateProfileModel
+
+<h2>Update Profile</h2>
+
+<form method="post">
+    <input asp-for="User.FullName" placeholder="Full Name" /><br />
+    <input asp-for="User.Place" placeholder="Place" /><br />
+    <input asp-for="User.PhoneNumber" placeholder="Phone Number" /><br />
+    <input asp-for="User.DateOfBirth" type="date" /><br />
+    <input asp-for="User.Country" placeholder="Country" /><br />
+    <button type="submit">Update</button>
+</form>
+
+<a href="/UsersList">View All Users</a>
+
