@@ -19,24 +19,22 @@ namespace LoginApp.Pages
 
         public void OnGet()
         {
-            // No initialization needed on GET
+            // No initialization needed for GET
         }
 
         public IActionResult OnPost()
         {
             if (!ModelState.IsValid)
             {
-                // If any [Required] fields are missing or invalid, re-display form with errors
                 return Page();
             }
 
-            // Add the new user to the database
             _context.Users.Add(User);
             _context.SaveChanges();
 
-            // Redirect to Login after successful registration
             return RedirectToPage("Login");
         }
     }
 }
+
 

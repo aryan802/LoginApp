@@ -10,11 +10,13 @@ namespace LoginApp.Data
         {
         }
 
-        // Tables in our SQLite database:
+        //  TELL EF CORE ABOUT THE ENTITIES
         public DbSet<User> Users { get; set; }
         public DbSet<Qualification> Qualifications { get; set; }
     }
 }
+
+
 
 
 

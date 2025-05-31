@@ -22,7 +22,7 @@ namespace LoginApp.Pages
 
         public void OnGet()
         {
-            // No initialization needed on GET
+            // No special initialization needed for GET
         }
 
         public IActionResult OnPost()
@@ -32,25 +32,23 @@ namespace LoginApp.Pages
                 return Page();
             }
 
-            // Attempt to find a matching user
             var user = _context.Users
                 .FirstOrDefault(u => u.Username == Username && u.Password == Password);
 
             if (user == null)
             {
-                // Invalid credentials—re-display login form
                 ModelState.AddModelError(string.Empty, "Invalid username or password.");
                 return Page();
             }
 
-            // Successful login:
-            // Store the username in session so other pages know who’s logged in
+            // Store the username in session for subsequent pages
             HttpContext.Session.SetString("Username", Username);
 
-            // Redirect to EducationalQualifications page right after login
+            // Redirect immediately to the educational-qualifications page
             return RedirectToPage("EducationalQualifications");
         }
     }
 }
+
 
 

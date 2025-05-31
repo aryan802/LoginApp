@@ -38,7 +38,7 @@ namespace LoginApp.Pages
                 return Page();
             }
 
-            // Update the existing user row
+            // Save changes to User
             _context.Users.Update(User);
             _context.SaveChanges();
 
@@ -47,4 +47,5 @@ namespace LoginApp.Pages
         }
     }
 }
+
 

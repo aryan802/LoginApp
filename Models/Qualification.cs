@@ -19,13 +19,13 @@ namespace LoginApp.Models
 
         public string Grade { get; set; }              // E.g. "A+" or "3.8 GPA".
 
-        // Foreign key to User:
         [Required]
-        public int UserId { get; set; }
+        public int UserId { get; set; }                // Foreign key to User.
 
         [ForeignKey("UserId")]
         public User User { get; set; }                 // Navigation back to User.
     }
 }
+
 
 

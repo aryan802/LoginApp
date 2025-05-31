@@ -14,17 +14,17 @@ namespace LoginApp.Pages
             _context = context;
         }
 
-        // This will hold all User entities, each with a list of Qualifications
         public List<User> Users { get; set; }
 
         public void OnGet()
         {
-            // Eagerly load Qualifications so we can display them in the table
+            // Eagerly load each user's Qualifications
             Users = _context.Users
                 .Include(u => u.Qualifications)
                 .ToList();
         }
     }
 }
+
 
 

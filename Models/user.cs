@@ -13,10 +13,10 @@ namespace LoginApp.Models
         public string Username { get; set; }        // Used to log in.
 
         [Required]
-        public string FullName { get; set; }        // User’s full name.
+        public string FullName { get; set; }        // User's full name.
 
         [Required]
-        public string Password { get; set; }        // Plain-text in this example (hash in production).
+        public string Password { get; set; }        // Plain-text in this example.
 
         public string Place { get; set; }           // City or town.
 
@@ -27,8 +27,9 @@ namespace LoginApp.Models
 
         public string Country { get; set; }         // Country name.
 
-        // Navigation property—one user can have many qualifications:
+        // Navigation property: one user can have many qualifications
         public ICollection<Qualification> Qualifications { get; set; }
     }
 }
+
 

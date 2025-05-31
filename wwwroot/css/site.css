@@ -1,4 +1,4 @@
-﻿/* Base Styles */
+﻿/* ── Base Styles ───────────────────────────────────────────────────────────────── */
 body {
     font-family: Arial, sans-serif;
     margin: 0;
@@ -12,7 +12,7 @@ body {
     margin: 0 auto;
 }
 
-/* Header  */
+/* ── Header ───────────────────────────────────────────────────────────────────── */
 .header {
     background-color: #333;
     color: #fff;
@@ -20,7 +20,7 @@ body {
     text-align: center;
 }
 
-/*  Navigation Bar  */
+/* ── Navigation Bar ───────────────────────────────────────────────────────────── */
 .nav {
     background-color: #555;
     overflow: hidden;
@@ -39,7 +39,7 @@ body {
             background-color: #e8491d;
         }
 
-/* Main Content  */
+/* ── Main Content ─────────────────────────────────────────────────────────────── */
 .content {
     background-color: #fff;
     padding: 20px;
@@ -48,7 +48,7 @@ body {
     margin-top: 20px;
 }
 
-/* Footer */
+/* ── Footer ───────────────────────────────────────────────────────────────────── */
 .footer {
     background-color: #333;
     color: #fff;
@@ -57,7 +57,7 @@ body {
     margin-top: 20px;
 }
 
-/* Forms & Inputs  */
+/* ── Forms & Inputs ──────────────────────────────────────────────────────────── */
 form label {
     display: block;
     margin-bottom: 5px;
@@ -88,7 +88,7 @@ form button {
         background-color: #555;
     }
 
-/*  Tables */
+/* ── Tables ───────────────────────────────────────────────────────────────────── */
 table {
     width: 100%;
     border-collapse: collapse;

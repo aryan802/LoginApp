@@ -28,7 +28,7 @@ namespace LoginApp.Pages
 
         public void OnGet()
         {
-            // Nothing to initialize on GET
+            // Nothing to load on GET
         }
 
         public IActionResult OnPost()
@@ -38,7 +38,7 @@ namespace LoginApp.Pages
                 return Page();
             }
 
-            // Find the user by username, phone, and date of birth
+            // Verify identity by matching username, phone, and date of birth
             var user = _context.Users.FirstOrDefault(u =>
                 u.Username == Username &&
                 u.PhoneNumber == PhoneNumber &&
@@ -46,18 +46,17 @@ namespace LoginApp.Pages
 
             if (user == null)
             {
-                // If no match, show error
                 ModelState.AddModelError(string.Empty, "Verification failed. Check your details.");
                 return Page();
             }
 
-            // Update password
+            // Update the password
             user.Password = NewPassword;
             _context.SaveChanges();
 
-            // Redirect back to login
             return RedirectToPage("Login");
         }
     }
 }
+
 
