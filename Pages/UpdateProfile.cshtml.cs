@@ -3,29 +3,48 @@ using LoginApp.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
-public class UpdateProfileModel : PageModel
+namespace LoginApp.Pages
 {
-    private readonly AppDbContext _context;
-
-    public UpdateProfileModel(AppDbContext context) => _context = context;
-
-    [BindProperty]
-    public User User { get; set; }
-
-    public IActionResult OnGet()
+    public class UpdateProfileModel : PageModel
     {
-        var username = TempData["Username"] as string;
-        if (username == null) return RedirectToPage("Login");
+        private readonly AppDbContext _context;
 
-        User = _context.Users.FirstOrDefault(u => u.Username == username);
-        return Page();
-    }
+        public UpdateProfileModel(AppDbContext context)
+        {
+            _context = context;
+        }
 
-    public IActionResult OnPost()
-    {
-        _context.Users.Update(User);
-        _context.SaveChanges();
-        return RedirectToPage("UsersList");
+        [BindProperty]
+        public User User { get; set; }
+
+        public IActionResult OnGet()
+        {
+            // Read “Username” from session (set on login)
+            var username = HttpContext.Session.GetString("Username");
+            if (string.IsNullOrEmpty(username))
+            {
+                return RedirectToPage("Login"); // Not logged in
+            }
+
+            // Load the user from DB
+            User = _context.Users.FirstOrDefault(u => u.Username == username);
+            return Page();
+        }
+
+        public IActionResult OnPost()
+        {
+            if (!ModelState.IsValid)
+            {
+                return Page();
+            }
+
+            // Update the existing user row
+            _context.Users.Update(User);
+            _context.SaveChanges();
+
+            // After saving, go to UsersList
+            return RedirectToPage("UsersList");
+        }
     }
 }
 

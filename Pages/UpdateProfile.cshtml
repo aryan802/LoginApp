@@ -1,16 +1,36 @@
 ﻿@page
 @model UpdateProfileModel
+@{
+    ViewData["Title"] = "Update Profile";
+}
 
 <h2>Update Profile</h2>
 
 <form method="post">
-    <input asp-for="User.FullName" placeholder="Full Name" /><br />
-    <input asp-for="User.Place" placeholder="Place" /><br />
-    <input asp-for="User.PhoneNumber" placeholder="Phone Number" /><br />
-    <input asp-for="User.DateOfBirth" type="date" /><br />
-    <input asp-for="User.Country" placeholder="Country" /><br />
-    <button type="submit">Update</button>
+    <label asp-for="User.FullName">Full Name</label>
+    <input asp-for="User.FullName" />
+    <span asp-validation-for="User.FullName"></span>
+
+    <label asp-for="User.Place">Place</label>
+    <input asp-for="User.Place" />
+    <span asp-validation-for="User.Place"></span>
+
+    <label asp-for="User.PhoneNumber">Phone Number</label>
+    <input asp-for="User.PhoneNumber" />
+    <span asp-validation-for="User.PhoneNumber"></span>
+
+    <label asp-for="User.DateOfBirth">Date of Birth</label>
+    <input asp-for="User.DateOfBirth" type="date" />
+    <span asp-validation-for="User.DateOfBirth"></span>
+
+    <label asp-for="User.Country">Country</label>
+    <input asp-for="User.Country" />
+    <span asp-validation-for="User.Country"></span>
+
+    <button type="submit">Save Changes</button>
 </form>
 
-<a href="/UsersList">View All Users</a>
+<p><a href="/UsersList">View All Registered Users</a></p>
+<p><a href="/EducationalQualifications">Edit Qualifications</a></p>
+
 

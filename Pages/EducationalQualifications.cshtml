@@ -1,0 +1,62 @@
+﻿@page
+@model EducationalQualificationsModel
+@{
+    ViewData["Title"] = "Educational Qualifications";
+}
+
+<h2>Educational Qualifications</h2>
+
+<form method="post">
+    <label asp-for="Qualification.Degree">Degree</label>
+    <input asp-for="Qualification.Degree" placeholder="e.g. B.Sc. Computer Science" />
+    <span asp-validation-for="Qualification.Degree"></span>
+
+    <label asp-for="Qualification.University">University</label>
+    <input asp-for="Qualification.University" placeholder="e.g. State University" />
+    <span asp-validation-for="Qualification.University"></span>
+
+    <label asp-for="Qualification.Year">Year of Passing</label>
+    <input asp-for="Qualification.Year" type="number" placeholder="e.g. 2022" />
+    <span asp-validation-for="Qualification.Year"></span>
+
+    <label asp-for="Qualification.Grade">Grade / GPA</label>
+    <input asp-for="Qualification.Grade" placeholder="e.g. A+ or 3.8" />
+    <span asp-validation-for="Qualification.Grade"></span>
+
+    <button type="submit">Add Qualification</button>
+</form>
+
+<h3>Your Qualifications</h3>
+@if (Model.Qualifications != null && Model.Qualifications.Any())
+{
+    <table>
+        <thead>
+            <tr>
+                <th>Degree</th>
+                <th>University</th>
+                <th>Year</th>
+                <th>Grade</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var q in Model.Qualifications)
+            {
+                <tr>
+                    <td>@q.Degree</td>
+                    <td>@q.University</td>
+                    <td>@q.Year</td>
+                    <td>@q.Grade</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+else
+{
+    <p>You have not added any qualifications yet.</p>
+}
+
+<p>
+    <a href="/UpdateProfile">← Update Profile</a> |
+    <a href="/UsersList">View All Registered Users →</a>
+</p>

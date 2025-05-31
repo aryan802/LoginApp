@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
 namespace LoginApp.Models
@@ -6,29 +7,28 @@ namespace LoginApp.Models
     public class User
     {
         [Key]
-        public int Id { get; set; }
+        public int Id { get; set; }                 // Primary key.
 
         [Required]
-        public string Username { get; set; }
+        public string Username { get; set; }        // Used to log in.
 
         [Required]
-        public string FullName { get; set; }
+        public string FullName { get; set; }        // User’s full name.
 
         [Required]
-        public string Password { get; set; }
+        public string Password { get; set; }        // Plain-text in this example (hash in production).
 
-        [Required]
-        public string Place { get; set; }
+        public string Place { get; set; }           // City or town.
 
-        [Required]
-        public string PhoneNumber { get; set; }
+        public string PhoneNumber { get; set; }     // For password reset.
 
-        [Required]
         [DataType(DataType.Date)]
-        public DateTime DateOfBirth { get; set; }
+        public DateTime DateOfBirth { get; set; }   // For password reset check.
 
-        [Required]
-        public string Country { get; set; }
+        public string Country { get; set; }         // Country name.
+
+        // Navigation property—one user can have many qualifications:
+        public ICollection<Qualification> Qualifications { get; set; }
     }
 }
 

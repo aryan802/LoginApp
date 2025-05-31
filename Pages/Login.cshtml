@@ -1,15 +1,26 @@
-﻿@page "/"
+﻿@using LoginApp.Pages
+@page
 @model LoginModel
+
+@{
+    ViewData["Title"] = "Login";
+}
 
 <h2>Login</h2>
 
 <form method="post">
-    <input asp-for="Username" placeholder="Username" /><br />
-    <input asp-for="Password" placeholder="Password" type="password" /><br />
+    <label asp-for="Username">Username</label>
+    <input asp-for="Username" placeholder="Your username" />
+    <span asp-validation-for="Username"></span>
+
+    <label asp-for="Password">Password</label>
+    <input asp-for="Password" type="password" placeholder="Your password" />
+    <span asp-validation-for="Password"></span>
+
     <button type="submit">Login</button>
 </form>
 
-<a href="/ChangePassword">Forgot password?</a><br />
-<a href="/Register">New User</a>
+<p><a href="/ChangePassword">Forgot password?</a></p>
+
 
 

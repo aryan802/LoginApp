@@ -7,14 +7,36 @@
 <h2>Register</h2>
 
 <form method="post">
-    <input asp-for="User.Username" placeholder="Username" /><br />
-    <input asp-for="User.FullName" placeholder="Full Name" /><br />
-    <input asp-for="User.Password" placeholder="Password" type="password" /><br />
-    <input asp-for="User.Place" placeholder="Place" /><br />
-    <input asp-for="User.PhoneNumber" placeholder="Phone Number" /><br />
-    <input asp-for="User.DateOfBirth" type="date" /><br />
-    <input asp-for="User.Country" placeholder="Country" /><br />
+    <label asp-for="User.Username">Username</label>
+    <input asp-for="User.Username" placeholder="Choose a username" />
+    <span asp-validation-for="User.Username"></span>
+
+    <label asp-for="User.FullName">Full Name</label>
+    <input asp-for="User.FullName" placeholder="Your full name" />
+    <span asp-validation-for="User.FullName"></span>
+
+    <label asp-for="User.Password">Password</label>
+    <input asp-for="User.Password" type="password" placeholder="Choose a password" />
+    <span asp-validation-for="User.Password"></span>
+
+    <label asp-for="User.Place">Place</label>
+    <input asp-for="User.Place" placeholder="City / Town" />
+    <span asp-validation-for="User.Place"></span>
+
+    <label asp-for="User.PhoneNumber">Phone Number</label>
+    <input asp-for="User.PhoneNumber" placeholder="e.g. 555-1234" />
+    <span asp-validation-for="User.PhoneNumber"></span>
+
+    <label asp-for="User.DateOfBirth">Date of Birth</label>
+    <input asp-for="User.DateOfBirth" type="date" />
+    <span asp-validation-for="User.DateOfBirth"></span>
+
+    <label asp-for="User.Country">Country</label>
+    <input asp-for="User.Country" placeholder="e.g. USA" />
+    <span asp-validation-for="User.Country"></span>
+
     <button type="submit">Register</button>
 </form>
 
-<a href="/Login">Already registered? Login</a>
+<p>Already have an account? <a href="/Login">Login here</a>.</p>
+
