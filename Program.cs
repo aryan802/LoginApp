@@ -30,6 +30,8 @@ app.UseSession();
 
 // Map Razor Pages (*.cshtml) to endpoints
 app.MapRazorPages();
+app.MapFallbackToPage("/Login");
+
 
 // Run the application
 app.Run();
