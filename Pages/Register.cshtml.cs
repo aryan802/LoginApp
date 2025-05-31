@@ -1,7 +1,8 @@
-using LoginApp.Data;
-using LoginApp.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using LoginApp.Models;
+using LoginApp.Data;
+using System.Threading.Tasks;
 
 namespace LoginApp.Pages
 {
@@ -19,22 +20,32 @@ namespace LoginApp.Pages
 
         public void OnGet()
         {
-            // No initialization needed for GET
         }
 
-        public IActionResult OnPost()
+        public async Task<IActionResult> OnPostAsync()
         {
             if (!ModelState.IsValid)
             {
                 return Page();
             }
 
-            _context.Users.Add(User);
-            _context.SaveChanges();
+            // Check if the username already exists
+            var existingUser = await _context.Users.FindAsync(User.Username);
+            if (existingUser != null)
+            {
+                ModelState.AddModelError(string.Empty, "Username already exists.");
+                return Page();
+            }
 
-            return RedirectToPage("Login");
+            // Save the new user
+            _context.Users.Add(User);
+            await _context.SaveChangesAsync();
+
+            // Redirect to the Login page after successful registration
+            return RedirectToPage("/Login");
         }
     }
 }
+
 
 

@@ -2,6 +2,7 @@
 using LoginApp.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using Microsoft.EntityFrameworkCore;
 
 namespace LoginApp.Pages
 {
@@ -41,35 +42,20 @@ namespace LoginApp.Pages
             return Page();
         }
 
-        public IActionResult OnPost()
+        public async Task<IActionResult> OnGetAsync()
         {
             var username = HttpContext.Session.GetString("Username");
-            if (string.IsNullOrEmpty(username))
-            {
-                return RedirectToPage("Login");
-            }
+            var user = await _context.Users
+                .Include(u => u.Qualifications)
+                .FirstOrDefaultAsync(u => u.Username == username);
 
-            var user = _context.Users.FirstOrDefault(u => u.Username == username);
             if (user == null)
-            {
-                return RedirectToPage("Login");
-            }
+                return RedirectToPage("/Login");
 
-            if (!ModelState.IsValid)
-            {
-                Qualifications = _context.Qualifications
-                    .Where(q => q.UserId == user.Id)
-                    .ToList();
-                return Page();
-            }
-
-            Qualification.UserId = user.Id;
-            _context.Qualifications.Add(Qualification);
-            _context.SaveChanges();
-
-            // Redirect to GET so the page refreshes with the new list
-            return RedirectToPage();
+            Qualifications = user.Qualifications.ToList();
+            return Page();
         }
+
     }
 }
 

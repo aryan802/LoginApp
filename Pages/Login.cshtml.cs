@@ -2,6 +2,7 @@
 using LoginApp.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using Microsoft.EntityFrameworkCore;
 
 namespace LoginApp.Pages
 {
@@ -25,28 +26,21 @@ namespace LoginApp.Pages
             // No special initialization needed for GET
         }
 
-        public IActionResult OnPost()
+        public async Task<IActionResult> OnPostAsync()
         {
-            if (!ModelState.IsValid)
-            {
-                return Page();
-            }
-
-            var user = _context.Users
-                .FirstOrDefault(u => u.Username == Username && u.Password == Password);
+            var user = await _context.Users
+                .FirstOrDefaultAsync(u => u.Username == Username && u.Password == Password);
 
             if (user == null)
             {
-                ModelState.AddModelError(string.Empty, "Invalid username or password.");
+                ModelState.AddModelError("", "Invalid login.");
                 return Page();
             }
 
-            // Store the username in session for subsequent pages
-            HttpContext.Session.SetString("Username", Username);
-
-            // Redirect immediately to the educational-qualifications page
-            return RedirectToPage("EducationalQualifications");
+            // Store user session, then redirect
+            return RedirectToPage("/EducationalQualifications");
         }
+
     }
 }
 

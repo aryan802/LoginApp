@@ -2,6 +2,7 @@ using LoginApp.Data;
 using LoginApp.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using Microsoft.EntityFrameworkCore;
 
 namespace LoginApp.Pages
 {
@@ -31,20 +32,27 @@ namespace LoginApp.Pages
             return Page();
         }
 
-        public IActionResult OnPost()
+        public async Task<IActionResult> OnGetAsync()
+        {
+            var username = HttpContext.Session.GetString("Username");
+            if (username == null)
+                return RedirectToPage("/Login");
+
+            User = await _context.Users.FirstOrDefaultAsync(u => u.Username == username);
+            return Page();
+        }
+
+        public async Task<IActionResult> OnPostAsync()
         {
             if (!ModelState.IsValid)
-            {
                 return Page();
-            }
 
-            // Save changes to User
             _context.Users.Update(User);
-            _context.SaveChanges();
+            await _context.SaveChangesAsync();
 
-            // After saving, go to UsersList
-            return RedirectToPage("UsersList");
+            return RedirectToPage("/EducationalQualifications");
         }
+
     }
 }
 

@@ -1,5 +1,6 @@
 using LoginApp.Data;
 using LoginApp.Models;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 
@@ -16,13 +17,15 @@ namespace LoginApp.Pages
 
         public List<User> Users { get; set; }
 
-        public void OnGet()
+        public async Task<IActionResult> OnGetAsync()
         {
-            // Eagerly load each user's Qualifications
-            Users = _context.Users
+            Users = await _context.Users
                 .Include(u => u.Qualifications)
-                .ToList();
+                .ToListAsync();
+
+            return Page();
         }
+
     }
 }
 
