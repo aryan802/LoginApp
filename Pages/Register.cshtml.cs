@@ -1,7 +1,8 @@
+using LoginApp.Data;
+using LoginApp.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using LoginApp.Models;
-using LoginApp.Data;
+using Microsoft.EntityFrameworkCore;
 using System.Threading.Tasks;
 
 namespace LoginApp.Pages
@@ -30,7 +31,9 @@ namespace LoginApp.Pages
             }
 
             // Check if the username already exists
-            var existingUser = await _context.Users.FindAsync(User.Username);
+            var existingUser = await _context.Users
+                .FirstOrDefaultAsync(u => u.Username == User.Username);
+
             if (existingUser != null)
             {
                 ModelState.AddModelError(string.Empty, "Username already exists.");
@@ -42,6 +45,7 @@ namespace LoginApp.Pages
             await _context.SaveChangesAsync();
 
             // Redirect to the Login page after successful registration
+            Console.WriteLine("Redirecting to Login...");
             return RedirectToPage("/Login");
         }
     }

@@ -4,10 +4,10 @@ using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// 1️⃣ Add Razor Pages services:
+// 1️ Add Razor Pages services:
 builder.Services.AddRazorPages();
 
-// 2️⃣ Add EF Core with SQLite:
+// 2️ Add EF Core with SQLite:
 builder.Services.AddDbContext<AppDbContext>(options =>
     options.UseSqlite(builder.Configuration.GetConnectionString("DefaultConnection"))
 );
@@ -30,7 +30,8 @@ app.UseSession();
 
 // Map Razor Pages (*.cshtml) to endpoints
 app.MapRazorPages();
-app.MapFallbackToPage("/Login");
+
+
 
 
 // Run the application
