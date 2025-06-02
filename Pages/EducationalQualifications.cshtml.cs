@@ -3,6 +3,7 @@ using LoginApp.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
+using System.Threading.Tasks;
 
 namespace LoginApp.Pages
 {
@@ -20,42 +21,60 @@ namespace LoginApp.Pages
 
         public List<Qualification> Qualifications { get; set; }
 
-        public IActionResult OnGet()
+        // Keep only the async GET handler:
+        public async Task<IActionResult> OnGetAsync()
         {
-            // Ensure user is logged in by checking session
+            // Ensure user is logged in
             var username = HttpContext.Session.GetString("Username");
             if (string.IsNullOrEmpty(username))
             {
-                return RedirectToPage("Login");
+                return RedirectToPage("/Login");
             }
 
-            var user = _context.Users.FirstOrDefault(u => u.Username == username);
+            var user = await _context.Users
+                .FirstOrDefaultAsync(u => u.Username == username);
             if (user == null)
             {
-                return RedirectToPage("Login");
+                return RedirectToPage("/Login");
             }
 
-            Qualifications = _context.Qualifications
+            Qualifications = await _context.Qualifications
                 .Where(q => q.UserId == user.Id)
-                .ToList();
+                .ToListAsync();
 
             return Page();
         }
 
-        public async Task<IActionResult> OnGetAsync()
+        public async Task<IActionResult> OnPostAsync()
         {
             var username = HttpContext.Session.GetString("Username");
-            var user = await _context.Users
-                .Include(u => u.Qualifications)
-                .FirstOrDefaultAsync(u => u.Username == username);
-
-            if (user == null)
+            if (string.IsNullOrEmpty(username))
+            {
                 return RedirectToPage("/Login");
+            }
 
-            Qualifications = user.Qualifications.ToList();
-            return Page();
+            var user = await _context.Users
+                .FirstOrDefaultAsync(u => u.Username == username);
+            if (user == null)
+            {
+                return RedirectToPage("/Login");
+            }
+
+            //if (!ModelState.IsValid)
+            //{
+            //    Qualifications = await _context.Qualifications
+            //        .Where(q => q.UserId == user.Id)
+            //        .ToListAsync();
+            //    return Page();
+            //}
+
+            Qualification.UserId = user.Id;
+            _context.Qualifications.Add(Qualification);
+            await _context.SaveChangesAsync();
+
+            return RedirectToPage(); // reload GET
         }
-
     }
 }
+
 

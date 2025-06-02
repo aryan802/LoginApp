@@ -28,7 +28,7 @@ namespace LoginApp.Models
         public string Country { get; set; }         // Country name.
 
         // Navigation property: one user can have many qualifications
-        public ICollection<Qualification> Qualifications { get; set; }
+        public ICollection<Qualification> Qualifications { get; set; } = new List<Qualification>();
     }
 }
 

@@ -7,6 +7,19 @@
 
 <h2>Register</h2>
 
+<partial name="_ValidationScriptsPartial" />
+
+@if (!ViewData.ModelState.IsValid)
+{
+    <div class="text-danger">
+        @foreach (var modelError in ViewData.ModelState.Values.SelectMany(v => v.Errors))
+        {
+            <div>@modelError.ErrorMessage</div>
+        }
+    </div>
+}
+
+
 <form method="post">
     <label asp-for="User.Username">Username</label>
     <input asp-for="User.Username" placeholder="Choose a username" />
@@ -38,6 +51,8 @@
 
     <button type="submit">Register</button>
 </form>
+
+
 
 <p>Already have an account? <a href="/Login">Login here</a>.</p>
 

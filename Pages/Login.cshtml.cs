@@ -37,6 +37,10 @@ namespace LoginApp.Pages
                 return Page();
             }
 
+            // Save login info
+            HttpContext.Session.SetString("Username", user.Username);
+
+
             // Store user session, then redirect
             return RedirectToPage("/EducationalQualifications");
         }

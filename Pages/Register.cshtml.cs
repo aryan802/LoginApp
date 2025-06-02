@@ -27,6 +27,7 @@ namespace LoginApp.Pages
         {
             if (!ModelState.IsValid)
             {
+                Console.WriteLine("Model state is not valid.");
                 return Page();
             }
 
@@ -46,7 +47,7 @@ namespace LoginApp.Pages
 
             // Redirect to the Login page after successful registration
             Console.WriteLine("Redirecting to Login...");
-            return RedirectToPage("/Login");
+            return Redirect("/Login");
         }
     }
 }
