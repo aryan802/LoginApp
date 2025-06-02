@@ -7,7 +7,7 @@ namespace LoginApp.Pages
     {
         public IActionResult OnGet()
         {
-            return RedirectToPage("/Login");
+            return RedirectToPage("/Register");
         }
     }
 }
